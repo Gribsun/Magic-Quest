@@ -70,14 +70,12 @@ app.use('/events', eventRouter);
 app.use('/favorites', favoritesRouter);
 app.use('/pics', uploadRouter);
 
-
-
 app.listen(PORT, async () => {
   try {
     await sequelize.authenticate();
     console.log(`Server has been started on PORT: ${PORT}`);
-    console.log("Есть коннект с БД ))!");
+    console.log("Есть коннект с БД");
   } catch (error) {
-    console.error("Бяда с подключением к БД :(", error.message);
+    console.error("Нет подключения к БД", error.message);
   }
 });

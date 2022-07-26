@@ -4,10 +4,8 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import AddIcon from "@mui/icons-material/Add";
 import { useState, useEffect } from "react";
 import Popover from "@mui/material/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
@@ -23,8 +21,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "rgba(255,255,255, 0.9)",
-
-  // border: "2px solid #000",
   boxShadow: 24,
   p: 4,
   display: "flex",
@@ -162,25 +158,6 @@ export default function Story({
         component="form"
         encType="multipart/form-data"
         autoComplete="off">
-          {/* <TextField
-            classes={{
-              root: classes.root,
-            }}
-            sx={{
-              "& label": { color: "#711d6f" },
-              "& label.Mui-focused": {
-                color: "#711d6f",
-              },
-              "& legend": {
-                color: "#711d6f",
-              },
-            }}
-            required
-            id="outlined-required"
-            label="Image"
-            value={newImg}
-            onChange={(event) => setNewImg(event.target.value)}
-          /> */}
             <>
               <input
                 name="storypic"
@@ -195,7 +172,7 @@ export default function Story({
                 <Button variant="raised" component="span" className={classes.button}>
                   Upload Image
                 </Button>
-              </label> 
+              </label>
             </>
           <TextField
             classes={{
@@ -245,13 +222,12 @@ export default function Story({
               ":hover": {
                 border: "none",
                 bgcolor: "#eba7d0",
-                color: "#fff", // theme.palette.primary.main
+                color: "#fff",
               },
             }}
             id={id}
             size="small"
             type="submit"
-            // onClick={(e) => editHandler(e)}
           >
             Submit
           </Button>
@@ -265,7 +241,7 @@ export default function Story({
               ":hover": {
                 border: "none",
                 bgcolor: "#eba7d0",
-                color: "#fff", // theme.palette.primary.main
+                color: "#fff",
               },
             }}
             size="small"

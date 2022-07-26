@@ -1,9 +1,6 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
 import "./footer.css";
 
 const Footer = () => {
@@ -37,11 +34,6 @@ const Footer = () => {
         }}
       >
         <Box sx={{ display: { xs: "flex" } }}>
-          <MenuItem key={1}>
-            <Link to="team" className="link">
-              Our Team
-            </Link>
-          </MenuItem>
         </Box>
       </AppBar>
     </div>

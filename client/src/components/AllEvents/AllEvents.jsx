@@ -20,8 +20,6 @@ function AllEvents({ useStyles }) {
   return (
     <div className="events">
         <MyCalendar />
-      {/* <div className="calendar-event">
-      </div> */}
       <div className="events-list">
         {events.map((event) => (
           <Event

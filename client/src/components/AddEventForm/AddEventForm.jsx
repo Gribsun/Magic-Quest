@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import style from "../Profile/Profile.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Button, Input } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -14,8 +13,6 @@ import {
   GeoapifyContext,
 } from "@geoapify/react-geocoder-autocomplete";
 import "@geoapify/geocoder-autocomplete/styles/minimal.css";
-import { width } from "@mui/system";
-import axios from "axios";
 
 function AddEventForm({ useStyles }) {
   const classes = useStyles();
@@ -27,7 +24,6 @@ function AddEventForm({ useStyles }) {
   const [people, setPeople] = useState("");
   const [place, setPlace] = useState("");
   const [file, setFile] = useState([]);
-  const [value, setValue] = useState({});
   const [open, setOpen] = useState(false);
 
   const openForm = () => setOpen(true);
@@ -42,7 +38,6 @@ function AddEventForm({ useStyles }) {
   function submitHandler(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    // console.log('------------', title);
     formData.append('title', title);
     formData.append('description', description);
     formData.append('date', date);
@@ -50,7 +45,7 @@ function AddEventForm({ useStyles }) {
     formData.append('people', people);
     formData.append('place', place);
     formData.append("pic", file);
-    
+
     dispatch(addEvent(formData));
     closeForm();
     setTitle("");
@@ -76,52 +71,8 @@ function AddEventForm({ useStyles }) {
     // console.log(value);
   }
 
-  function preprocessHook(value) {
-    return `${value}, Munich, Germany`;
-  }
-
-  function postprocessHook(feature) {
-    return feature.properties.street;
-  }
-
-  function suggestionsFilter(suggestions) {
-    const processedStreets = [];
-
-    const filtered = suggestions.filter((value) => {
-      if (
-        !value.properties.street ||
-        processedStreets.indexOf(value.properties.street) >= 0
-      ) {
-        return false;
-      } else {
-        processedStreets.push(value.properties.street);
-        return true;
-      }
-    });
-
-    return filtered;
-  }
-
-  
-
   return (
     <>
-
-      {/* <form
-        name="pic"
-        onSubmit={(e) => uploadHandler(e)}
-        method="post"
-        encType="multipart/form-data"
-      >
-        <input type="file" name="pic" />
-        <input type="submit" name="pic" />
-      </form> */}
-      {/* <Button variant="contained" component="label">
-        Upload File
-        <input type="file" hidden />
-      </Button> */}
-
-
       <Button
         onClick={openForm}
         variant="outlined"
@@ -133,7 +84,7 @@ function AddEventForm({ useStyles }) {
           ":hover": {
             border: "none",
             bgcolor: "#eba7d0",
-            color: "#fff", // theme.palette.primary.main
+            color: "#fff",
           },
         }}
       >
@@ -177,25 +128,6 @@ function AddEventForm({ useStyles }) {
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />
-            {/* <TextField
-              classes={{
-                root: classes.root,
-              }}
-              sx={{
-                "& label": { color: "#711d6f" },
-                "& label.Mui-focused": {
-                  color: "#711d6f",
-                },
-                "& legend": {
-                  color: "#711d6f",
-                },
-              }}
-              required
-              id="outlined-required"
-              label="Image"
-              value={img}
-              onChange={(event) => setImg(event.target.value)}
-            /> */}
             <TextField
               classes={{
                 root: classes.root,
@@ -216,13 +148,6 @@ function AddEventForm({ useStyles }) {
               value={price}
               onChange={(event) => setPrice(event.target.value)}
             />
-            {/* <TextField
-              required
-              id="outlined-required"
-              label="Date"
-              value={date}
-              onChange={(event) => setDate(event.target.value)}
-            /> */}
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
                 label="Date"
@@ -272,14 +197,6 @@ function AddEventForm({ useStyles }) {
               value={people}
               onChange={(event) => setPeople(event.target.value)}
             />
-            {/* <TextField
-              required
-              id="outlined-required"
-              label="Place"
-              value={place}
-              onChange={(event) => setPlace(event.target.value)}
-            /> */}
-
             <>
               <input
                 name="pic"
@@ -294,7 +211,7 @@ function AddEventForm({ useStyles }) {
                 <Button variant="raised" component="span" className={classes.button}>
                   Upload Image
                 </Button>
-              </label> 
+              </label>
             </>
             <GeoapifyContext apiKey={process.env.REACT_APP_API_INPUT}>
               <GeoapifyGeocoderAutocomplete
@@ -312,8 +229,6 @@ function AddEventForm({ useStyles }) {
                 }}
                 placeSelect={onPlaceSelect}
                 suggestionsChange={onSuggectionChange}
-                // onChange={(event) => setPlace(event.target.value)}
-                // value={place}
               />
             </GeoapifyContext>
 
@@ -355,7 +270,7 @@ function AddEventForm({ useStyles }) {
                 ":hover": {
                   border: "none",
                   bgcolor: "#eba7d0",
-                  color: "#fff", // theme.palette.primary.main
+                  color: "#fff",
                 },
               }}
             >
@@ -372,7 +287,7 @@ function AddEventForm({ useStyles }) {
                 ":hover": {
                   border: "none",
                   bgcolor: "#eba7d0",
-                  color: "#fff", // theme.palette.primary.main
+                  color: "#fff",
                 },
               }}
               onClick={closeForm}
